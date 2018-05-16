@@ -1,3 +1,5 @@
 .*sw?
 *~
 venv
+*.pyc
+.idea
