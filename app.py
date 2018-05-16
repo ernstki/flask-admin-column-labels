@@ -1,6 +1,6 @@
 import sys
 from flask import Flask
-from flask_admin import Admin
+from flask_admin import Admin, AdminIndexView
 from flask_sqlalchemy import SQLAlchemy
 
 from models import Test, ColumnProperty
@@ -13,7 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = \
         'mysql://testuser:avbtsUF3-6_8_Fgzo_W-@localhost/foobar'
 
 db = SQLAlchemy(app)
-admin = Admin(app, name='fooadmin')
+admin = Admin(app, name='fooadmin',
+              index_view=AdminIndexView(name='Whatever', url='/'))
 
 admin.add_view(TestView(Test, db.session))
 admin.add_view(ColumnPropertiesView(ColumnProperty, db.session))
