@@ -8,5 +8,16 @@ class ColumnPropertiesView(ModelView):
 
 class TestView(ModelView):
     column_display_pk = True
-    column_list = ['id', 'name', 'description']
-    column_sortable_list = column_list
+
+    def __init__(self, model, session, **kwargs):
+        from models import ColumnProperty
+
+        cl = {}
+
+        for row in session.query(ColumnProperty):
+            cl[row.name] = row.proper_name
+
+        self.column_labels = cl
+
+        super(TestView, self).__init__(model, session, **kwargs)
+
