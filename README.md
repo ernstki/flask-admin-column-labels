@@ -8,8 +8,8 @@ inside the `__init__` for the `TestView` class (see
 [`views.py#L9`](views.py#L9)).
 
 Because SQLite [doesn't seem to support][1] column `COMMENT`s in SQL, this
-demo requires a running MySQL server. Set your credentials for the server in
-`app.py`.
+demo requires a running MySQL server. Copy `sample_config.ini` to `config.ini`
+and adjust the values inside to match your setup before proceeding.
 
 ## Installation
 

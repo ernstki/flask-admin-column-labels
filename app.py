@@ -7,10 +7,19 @@ from models import Test, ColumnProperty
 from views import TestView, ColumnPropertiesView
 
 app = Flask(__name__)
+cfg = {}
+
+# a very robust .ini parser ;) --see sample_config.ini
+with open('config.ini') as f:
+    for line in f.readlines():
+        line = line.replace(' ', '').replace('\t', '').strip()
+        if not line or line.startswith('#'): continue
+        cfg.update([tuple(line.split('='))])
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-        'mysql://testuser:avbtsUF3-6_8_Fgzo_W-@localhost/foobar'
+        "mysql://{user!s}:{password!s}@{host!s}/{table!s}".format(**cfg)
+
 
 db = SQLAlchemy(app)
 admin = Admin(app, name='fooadmin',
