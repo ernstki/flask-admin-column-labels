@@ -5,7 +5,7 @@ properly-capitalized labels from the column `COMMENT`s in a MySQL database.
 
 The `flask_admin.contrib.sqla.ModelView`'s `column_labels` property is updated
 inside the `__init__` for the `TestView` class (see
-[`views.py#L9`](./blob/master/views.py#L9)).
+[`views.py#L9`](views.py#L9)).
 
 Because SQLite [doesn't seem to support][1] column `COMMENT`s in SQL, this
 demo requires a running MySQL server. Set your credentials for the server in
@@ -72,6 +72,6 @@ Proper name: ENCODE ID
 
 anywhere in the column's comment. You can specify an arbitrary list of words
 that should always be in ALL CAPS at the top of
-[`models.py`](./blob/master/models.py).
+[`models.py`](models.py).
 
 [1]: https://www.sqlite.org/lang.html
