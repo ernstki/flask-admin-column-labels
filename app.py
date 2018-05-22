@@ -1,10 +1,11 @@
 import sys
 from flask import Flask
 from flask_admin import Admin, AdminIndexView
-from flask_sqlalchemy import SQLAlchemy
+
 
 from models import Test, ColumnProperty
 from views import TestView, ColumnPropertiesView
+from extensions import db
 
 app = Flask(__name__)
 cfg = {}
@@ -21,8 +22,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = \
         "mysql://{user!s}:{password!s}@{host!s}/{database!s}".format(**cfg)
 
+db.init_app(app)
 
-db = SQLAlchemy(app)
 admin = Admin(app, name="{}-admin".format(cfg['database']),
               index_view=AdminIndexView(name='Admin Home', url='/'),
               template_mode='bootstrap3')

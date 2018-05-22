@@ -26,9 +26,6 @@ class TestView(ModelView):
             clabels[row.name] = row.proper_name
             cdescriptions[row.name] = row.comment
 
-        print(clabels)
-        print(cdescriptions)
-
         self.column_labels = clabels
         self.column_descriptions = cdescriptions
 
