@@ -1,4 +1,4 @@
-# Flask-Admin column descriptions from column comments in the database
+# Dynamically generate Flask-Admin column labels/descriptions
 
 This demo app shows how to dynamically add column descriptions and
 properly-capitalized labels from the column `COMMENT`s in a MySQL
@@ -13,7 +13,7 @@ into the list view column headers, which reveal the column comments upon
 mouseover (overrides the `list_header` block from Flask-Admin's
 `templates/bootstrap3/admin/model/list.html`).
 
-![Animation showing the column tooltips](static/img/screenshot.gif)
+![Animation showing the column tooltips](static/img/tooltips.gif)
 
 Because SQLite [doesn't seem to support][1] column `COMMENT`s in SQL,
 this demo requires a running MySQL server. Copy `sample_config.ini` to
