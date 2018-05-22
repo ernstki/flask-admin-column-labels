@@ -13,8 +13,10 @@ into the list view column headers, which reveal the column comments upon
 mouseover (overrides the `list_header` block from Flask-Admin's
 `templates/bootstrap3/admin/model/list.html`).
 
-Because SQLite [doesn't seem to support][1] column `COMMENT`s in SQL, this
-demo requires a running MySQL server. Copy `sample_config.ini` to
+![Animation showing the column tooltips](static/img/screenshot.gif)
+
+Because SQLite [doesn't seem to support][1] column `COMMENT`s in SQL,
+this demo requires a running MySQL server. Copy `sample_config.ini` to
 `config.ini` and adjust the values inside to match your setup before
 proceeding.
 
