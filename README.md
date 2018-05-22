@@ -1,15 +1,22 @@
 # Flask-Admin column descriptions from column comments in the database
 
 This demo app shows how to dynamically add column descriptions and
-properly-capitalized labels from the column `COMMENT`s in a MySQL database.
+properly-capitalized labels from the column `COMMENT`s in a MySQL
+database.
 
-The `flask_admin.contrib.sqla.ModelView`'s `column_labels` property is updated
-inside the `__init__` for the `TestView` class (see
-[`views.py#L9`](views.py#L9)).
+The `flask_admin.contrib.sqla.ModelView`'s `column_labels` and
+`column_descriptions` properties are updated inside the `__init__` for
+the `TestView` class (see [`views.py#L9`](views.py#L9)).
+
+There is also a slight template tweak which adds question mark icons
+into the list view column headers, which reveal the column comments upon
+mouseover (overrides the `list_header` block from Flask-Admin's
+`templates/bootstrap3/admin/model/list.html`).
 
 Because SQLite [doesn't seem to support][1] column `COMMENT`s in SQL, this
-demo requires a running MySQL server. Copy `sample_config.ini` to `config.ini`
-and adjust the values inside to match your setup before proceeding.
+demo requires a running MySQL server. Copy `sample_config.ini` to
+`config.ini` and adjust the values inside to match your setup before
+proceeding.
 
 ## Installation
 
@@ -42,10 +49,9 @@ CREATE TABLE `test` (
 ```
 
 The `TableComment` model assumes a view is present on the server called
-`v_table_comments`. You could modify the source and replace this with
-a SQLAlchemy `Base` model built on top of the MySQL
-`information_schema.TABLES` table, too, but in my particular case, I had the
-view available, so it was easier.
+`v_table_comments`. This seemed easier to me than using two SQLAlchemy engines
+or some weird table factory in order to query across two separate databases
+(schemata) with the SQLAlchemy ORM.
 
 The `CREATE VIEW` statement looks like this:
 
@@ -59,6 +65,15 @@ CREATE VIEW `v_table_comments` AS
     WHERE
         (`information_schema`.`TABLES`.`TABLE_SCHEMA` = DATABASE());
 ```
+
+If you define this view this as the `root` user, it will have `SQL SECURITY
+DEFINER`, so all users will be able to access the contents of this view (all
+metadata for the tables in `DATABASE()`); think about the security
+implications of this if you are testing on a "real" MySQL server.
+
+Both of the above statements are included in the included `setup.sql` script,
+which you can source from within the `mysql` client once you've authenticated
+with the server and done the appropriate `USE <database>`
 
 ## Additional goodies
 

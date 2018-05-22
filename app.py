@@ -16,14 +16,16 @@ with open('config.ini') as f:
         if not line or line.startswith('#'): continue
         cfg.update([tuple(line.split('='))])
 
+# app.config['EXPLAIN_TEMPLATE_LOADING'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-        "mysql://{user!s}:{password!s}@{host!s}/{table!s}".format(**cfg)
+        "mysql://{user!s}:{password!s}@{host!s}/{database!s}".format(**cfg)
 
 
 db = SQLAlchemy(app)
-admin = Admin(app, name='fooadmin',
-              index_view=AdminIndexView(name='Whatever', url='/'))
+admin = Admin(app, name="{}-admin".format(cfg['database']),
+              index_view=AdminIndexView(name='Admin Home', url='/'),
+              template_mode='bootstrap3')
 
 admin.add_view(TestView(Test, db.session))
 admin.add_view(ColumnPropertiesView(ColumnProperty, db.session))
