@@ -41,10 +41,10 @@ included `app.py` looks like this:
 
 ```sql
 CREATE TABLE `test` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The unique ID for the record',
-  `name` varchar(45) DEFAULT NULL COMMENT 'The name',
-  `description` varchar(200) DEFAULT NULL COMMENT 'A longer description',
-  PRIMARY KEY (`id`)
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The unique ID for the record',
+    `name` varchar(45) DEFAULT NULL COMMENT 'The name',
+    `description` varchar(200) DEFAULT NULL COMMENT 'A longer description',
+    PRIMARY KEY (`id`)
 );
 ```
 
