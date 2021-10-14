@@ -33,7 +33,7 @@ virtualenv venv && source venv/bin/activate
 pip install -r requirements.txt
 
 # launch app w/ optional port number (default: 5000)
-python run.py  # 8080
+python app.py  # 8080
 ```
 
 ## Additional configuration
@@ -91,4 +91,9 @@ anywhere in the column's comment. You can specify an arbitrary list of words
 that should always be in ALL CAPS at the top of
 [`models.py`](models.py).
 
+## License
+
+Same as [Flask-Admin itself][2]: BSD 3-Clause. See [`LICENSE`](LICENSE).
+
 [1]: https://www.sqlite.org/lang.html
+[2]: https://github.com/flask-admin/flask-admin/blob/master/LICENSE
